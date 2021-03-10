@@ -11,6 +11,7 @@ from os.path import basename, dirname, exists, isdir, isfile, join, relpath
 from shutil import rmtree
 from zipfile import ZIP_DEFLATED, BadZipFile, ZipFile, is_zipfile
 
+from natsort import os_sorted
 from rarfile import BadRarFile, RarFile, is_rarfile
 
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
@@ -39,7 +40,7 @@ async def lst(event):
         lists = os.listdir(path)
         files = ""
         folders = ""
-        for contents in sorted(lists):
+        for contents in os_sorted(lists):
             catpath = path + "/" + contents
             if not isdir(catpath):
                 size = os.stat(catpath).st_size
